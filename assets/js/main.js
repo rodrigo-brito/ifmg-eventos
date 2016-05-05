@@ -61,7 +61,6 @@ jQuery(document).ready(function($) {
 		var url = $(this).data('url');
 		var id_minicurso = $(this).data('minicurso');
 		var id_usuario = $(this).data('usuario');
-		var valorAnterior = botao.html();
 		botao.html('Removendo...');
 		$.post(url, {action: 'descadastrar_minicurso_usuario', minicurso: id_minicurso, usuario: id_usuario}, function(data) {
 			if(data === 'sucesso'){
