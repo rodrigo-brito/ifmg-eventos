@@ -1,5 +1,27 @@
-<?php 
+<?php
+$tb_incricoes_nome = $wpdb->prefix . 'tb_incricoes';
 
+// Criação da base de dados de inscrições
+function register_eati_inscricoes_db() {
+   	global $wpdb;
+  	global $tb_incricoes_nome;
+	if($wpdb->get_var("show tables like '$tb_incricoes_nome'") != $tb_incricoes_nome)
+	{
+		$sql = "CREATE TABLE " . $tb_incricoes_nome . " (
+			`id` mediumint(9) NOT NULL AUTO_INCREMENT,
+			`created_at` datetime NOT NULL,
+			`user_id` integer NOT NULL,
+			`user_name` varchar(64) NOT NULL,
+			`evento_id` integer NOT NULL,
+			`evento_name` varchar(64) NOT NULL,
+			UNIQUE KEY id (id)
+		);";
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+	}
+
+}
+add_action( 'init', 'register_eati_inscricoes_db' );
 
 function destaque_cpt() {
     $slider = new Odin_Post_Type(
@@ -101,151 +123,32 @@ add_action( 'init', 'evento_taxonomy', 1 );
 
 // 1. customize ACF path
 add_filter('acf/settings/path', 'my_acf_settings_path');
- 
+
 function my_acf_settings_path( $path ) {
- 
     // update path
     $path = get_stylesheet_directory() . '/inc/acf/';
-    
+
     // return
     return $path;
-    
+
 }
- 
+
 
 // 2. customize ACF dir
 add_filter('acf/settings/dir', 'my_acf_settings_dir');
- 
+
 function my_acf_settings_dir( $dir ) {
- 
+
     // update path
     $dir = get_stylesheet_directory_uri() . '/inc/acf/';
-    
+
     // return
     return $dir;
-    
+
 }
- 
 
 // 3. Hide ACF field group menu item
 //add_filter('acf/settings/show_admin', '__return_false');
 
-
 // 4. Include ACF
 include_once( get_stylesheet_directory() . '/inc/acf/acf.php' );
-
-/*
-if(function_exists("register_field_group"))
-{
-	register_field_group(array (
-		'id' => 'acf_eventos-fields',
-		'title' => 'Eventos Fields',
-		'fields' => array (
-			array (
-				'key' => 'field_561089250710a',
-				'label' => 'Data',
-				'name' => 'data_evento',
-				'type' => 'date_picker',
-				'instructions' => 'Data de acontecimento do evento',
-				'date_format' => 'yymmdd',
-				'display_format' => 'dd/mm/yy',
-				'first_day' => 1,
-			),
-			array (
-				'key' => 'field_56108a66d90c2',
-				'label' => 'Hora',
-				'name' => 'hora_evento',
-				'type' => 'text',
-				'instructions' => 'Hora de acontecimento do evento (Opcional)',
-				'default_value' => '',
-				'placeholder' => 'Ex: 12:00',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
-			),
-			array (
-				'key' => 'field_56108afb7deb5',
-				'label' => 'Descrição do evento',
-				'name' => 'descricao_evento',
-				'type' => 'textarea',
-				'instructions' => 'Breve descrição sobre o evento',
-				'default_value' => '',
-				'placeholder' => 'Descrever evento...',
-				'maxlength' => 254,
-				'rows' => '',
-				'formatting' => 'none',
-			),
-		),
-		'location' => array (
-			array (
-				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'evento',
-					'order_no' => 0,
-					'group_no' => 0,
-				),
-			),
-		),
-		'options' => array (
-			'position' => 'acf_after_title',
-			'layout' => 'no_box',
-			'hide_on_screen' => array (
-			),
-		),
-		'menu_order' => 0,
-	));
-	register_field_group(array (
-		'id' => 'acf_slider-fields',
-		'title' => 'Slider Fields',
-		'fields' => array (
-			array (
-				'key' => 'field_56108d55ad119',
-				'label' => 'Link do Slider',
-				'name' => 'slider_link',
-				'type' => 'post_object',
-				'instructions' => 'Link para página ou conteúdo interno relacionado ao slider',
-				'post_type' => array (
-					0 => 'all',
-				),
-				'taxonomy' => array (
-					0 => 'all',
-				),
-				'allow_null' => 0,
-				'multiple' => 0,
-			),
-			array (
-				'key' => 'field_56108e2ce59bb',
-				'label' => 'Descrição do Slider',
-				'name' => 'slider_descricao',
-				'type' => 'textarea',
-				'instructions' => 'Breve descrição que será exibida ao passar o Slider',
-				'default_value' => '',
-				'placeholder' => 'Descrever slider...',
-				'maxlength' => 260,
-				'rows' => '',
-				'formatting' => 'br',
-			),
-		),
-		'location' => array (
-			array (
-				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'slider',
-					'order_no' => 0,
-					'group_no' => 0,
-				),
-			),
-		),
-		'options' => array (
-			'position' => 'acf_after_title',
-			'layout' => 'no_box',
-			'hide_on_screen' => array (
-			),
-		),
-		'menu_order' => 0,
-	));
-}
-*/
