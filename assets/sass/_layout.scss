@@ -486,9 +486,9 @@ input#s {
 }
 /*** Button primary ***/
 .btn-primary {
-  background-image: -webkit-linear-gradient(top, $brand-primary 0%, lighten( $brand-primary, 8% ) 100%);
-  background-image: -o-linear-gradient(top, $brand-primary 0%, lighten( $brand-primary, 8% ) 100%);
-  background-image: linear-gradient(to bottom, $brand-primary 0%, lighten( $brand-primary, 8% ) 100%);
+  background-image: -webkit-linear-gradient(top, $brand-primary 0%, darken( $brand-primary, 3% ) 100%);
+  background-image: -o-linear-gradient(top, $brand-primary 0%, darken( $brand-primary, 3% ) 100%);
+  background-image: linear-gradient(to bottom, $brand-primary 0%, darken( $brand-primary, 3% ) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$brand-primary', endColorstr='lighten( $brand-primary, 8% )', GradientType=0);
   border-color: $brand-primary;
@@ -500,7 +500,7 @@ input#s {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-image: none;
   background: $brand-primary;
-  border-color: lighten($brand-primary, 10%);
+  border-color: lighten($brand-primary, 5%);
   color: white;
 }
 /*** Button Glass ***/
@@ -714,4 +714,11 @@ input#s {
         left: -14px;
         right: auto;
     }
+}
+
+/**
+ * Forms e cadastros de minicursos
+ */
+.msg-ajax {
+    margin: 0 20px;
 }

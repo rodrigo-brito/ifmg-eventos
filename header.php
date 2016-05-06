@@ -40,7 +40,7 @@
 					<span class="icon-bar"></span>
 				  </button>
 		          <a class="navbar-brand" href="<?php echo home_url(); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-header.jpg" class="logo" alt="Sabara Fotos">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-header.png" class="logo" alt="Sabara Fotos">
 		          </a>
 		        </div>
 		        <div class="collapse navbar-collapse navbar-right navbar-main-navigation">
@@ -58,8 +58,10 @@
 							</li>
 				          </ul>
 				        </li>
-				     </ul>
+				    </ul>
+				    <?php if( !is_user_logged_in() ): ?>
 					<a href="<?php echo wp_registration_url(); ?>" class="navbar-btn btn btn-blue btn-primary btn-lg pull-right hidden-xs" href="#">Cadastre-se</a>
+					<?php endif; ?>
 					<?php
 						wp_nav_menu(
 							array(

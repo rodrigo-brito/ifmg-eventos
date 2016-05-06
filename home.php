@@ -80,18 +80,19 @@ $sliders = get_posts( $args ); ?>
 				<?php endforeach; ?>
 			</div><!-- /.row -->
 			<div class="clearfix"></div>
-			<div id="blog" class="row">
-				<div class="container"  data-sr="enter top">
-					<h2>Últimas Notícias</h2>
-					<hr>
-				</div>
 				<?php
 					// The Query
 					$the_query = new WP_Query( ['posts_per_page' => 3, 'post_type' => 'post'] );
 
 					// The Loop
 					if ( $the_query->have_posts() ) {
-						while ( $the_query->have_posts() ) {
+						?>
+					<div id="blog" class="row">
+						<div class="container"  data-sr="enter top">
+							<h2>Últimas Notícias</h2>
+							<hr>
+						</div>
+						<?php while ( $the_query->have_posts() ) {
 							$the_query->the_post(); ?>
 
 							<div class="item-blog col-md-4" data-sr="enter top">
@@ -112,18 +113,19 @@ $sliders = get_posts( $args ); ?>
 									</div>
 								</div>
 							</div>
-						<?php }
+							<?php } ?>
+							<div class="more" data-sr="enter top">
+							<a href="<?php echo bloginfo('url');?>">Mais notícias <span class="glyphicon glyphicon-chevron-right"></span></a>
+						</div>
+					</div>
+					<!-- /.blog -->
+					<?php
 					} else {
 						// no posts found
 					}
 					/* Restore original Post Data */
 					wp_reset_postdata();
 				?>
-				<div class="more" data-sr="enter top">
-					<a href="<?php echo bloginfo('url');?>">Mais notícias <span class="glyphicon glyphicon-chevron-right"></span></a>
-				</div>
-			</div>
-			<!-- /.blog -->
 			<div class="page-header" data-sr="enter top">
 				<h2 id="timeline">Programação</h2>
 			</div>
@@ -164,14 +166,18 @@ $sliders = get_posts( $args ); ?>
 									<div class="timeline-heading">
 										<div class="media">
 											<div class="media-left">
-												<a href="<?php the_permalink(); ?>">
+												<?php $evento = get_field('pagina_evento'); ?>
+												<?php if($evento): ?>
+												<a href="<?php echo get_permalink($evento->ID); ?>">
 													<img class="media-object" src="<?php echo $thumbnail['0']; ?>">
 												</a>
+												<?php else: ?>
+													<img class="media-object" src="<?php echo $thumbnail['0']; ?>">
+												<?php endif; ?>
 											</div>
 											<div class="media-body">
 												<h4 class="media-heading">
-													<?php $evento = get_field('pagina_evento');
-													if($evento): ?>
+													<?php if($evento): ?>
 														<a href="<?php echo get_permalink($evento->ID); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 													<?php else: ?>
 														<?php the_title(); ?>
@@ -179,7 +185,7 @@ $sliders = get_posts( $args ); ?>
 												</h4>
 												<?php
 													if($date){
-														$data = $date->format('j \d\e F \d\e Y');
+														$data = $date->format('d/m/Y');
 													}
 													$hora = get_field('hora_evento');
 												 ?>
