@@ -20,6 +20,10 @@ if ( ! isset( $content_width ) ) {
 	$content_width = 600;
 }
 
+/** Configuração de data */
+setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+date_default_timezone_set('America/Sao_Paulo');
+
 /**
  * Odin Classes.
  */
@@ -258,8 +262,13 @@ function odin_enqueue_scripts() {
 		wp_enqueue_script( 'odin-main', $template_url . '/assets/js/main.js', array(), null, true );
 	} else {
 		// Grunt main file with Bootstrap, FitVids and others libs.
-		wp_enqueue_script( 'odin-main-min', $template_url . '/assets/js/main.min.js', array(), null, true );
+		wp_enqueue_script( 'odin-main', $template_url . '/assets/js/main.min.js', array(), null, true );
 	}
+
+	// Passando url do ajax
+	wp_localize_script( 'odin-main', 'ajax',array(
+		'url' => admin_url( 'admin-ajax.php' )
+	));
 
 	// Grunt watch livereload in the browser.
 	// wp_enqueue_script( 'odin-livereload', 'http://localhost:35729/livereload.js?snipver=1', array(), null, true );

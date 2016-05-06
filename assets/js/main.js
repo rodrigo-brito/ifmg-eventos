@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 	$('.cadastrar-minicurso').click(function(e) {
 		e.preventDefault();
 		var botao = $(this);
-		var url = $(this).data('url');
+		var url = ajax.url;
 		var id_minicurso = $(this).data('minicurso');
 		var valorAnterior = botao.html();
 		botao.html('Salvando...');
@@ -35,12 +35,13 @@ jQuery(document).ready(function($) {
 				$('.msg-danger').html(data.msg);
 			}
 			botao.html(valorAnterior);
+			atualizaListagem();
 		}, 'json');
 	});
 	$('.descadastrar-minicurso').click(function(e) {
 		e.preventDefault();
 		var botao = $(this);
-		var url = $(this).data('url');
+		var url = ajax.url;
 		var id_minicurso = $(this).data('minicurso');
 		var valorAnterior = botao.html();
 		botao.html('Cancelando...');
@@ -53,24 +54,40 @@ jQuery(document).ready(function($) {
 				$('.msg-danger').html(data.msg);
 			}
 			botao.html(valorAnterior);
+			atualizaListagem();
 		}, 'json');
 	});
-	$('.descadastrar-minicurso-usuario').click(function(e) {
+	$('#listagem-inscricoes').on('click', '.descadastrar-minicurso-usuario', function(e) {
 		e.preventDefault();
 		var botao = $(this);
-		var url = $(this).data('url');
 		var id_minicurso = $(this).data('minicurso');
 		var id_usuario = $(this).data('usuario');
+		console.log(id_minicurso+' - '+id_usuario);
 		var valorAnterior = botao.html();
 		botao.html('Removendo...');
-		$.post(url, {action: 'descadastrar_minicurso_usuario', minicurso: id_minicurso, usuario: id_usuario}, function(data) {
+		$.post(ajax.url, {action: 'descadastrar_minicurso_usuario', minicurso: id_minicurso, usuario: id_usuario}, function(data) {
 			if(data.status === 'success'){
-				$('#participante-'+id_usuario).remove();
 				$('.msg-success').html(data.msg);
 			}else{
-				$('.msg-success').html(data.msg);
+				$('.msg-danger').html(data.msg);
 			}
 			botao.html(valorAnterior);
+			atualizaListagem();
 		}, 'json');
 	});
+
+	var atualizaListagem = function(){
+		$.ajax({
+			url: ajax.url,
+			type: 'POST',
+			dataType: 'html',
+			data: {action: 'lista_cadastrados', minicurso: $('#minicurso-id').val()}
+		})
+		.done(function(data) {
+			$('#listagem-inscricoes').html(data).fadeIn('fast');
+		})
+		.fail(function() {
+			$('#listagem-inscricoes').html('Erro ao recuperar dados da listagem').fadeIn('fast');
+		});
+	};
 });
