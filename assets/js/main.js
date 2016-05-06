@@ -27,15 +27,15 @@ jQuery(document).ready(function($) {
 		var valorAnterior = botao.html();
 		botao.html('Salvando...');
 		$.post(url, {action: 'cadastrar_minicurso', minicurso: id_minicurso}, function(data) {
-			if(data === 'sucesso'){
+			if(data.status === 'success'){
 				botao.hide();
 				$('.descadastrar-minicurso').show();
+				$('.msg-success').html(data.msg);
 			}else{
-				botao.html('Erro ao cadastrar');
+				$('.msg-danger').html(data.msg);
 			}
 			botao.html(valorAnterior);
-			alert(data);
-		});
+		}, 'json');
 	});
 	$('.descadastrar-minicurso').click(function(e) {
 		e.preventDefault();
@@ -45,15 +45,15 @@ jQuery(document).ready(function($) {
 		var valorAnterior = botao.html();
 		botao.html('Cancelando...');
 		$.post(url, {action: 'descadastrar_minicurso', minicurso: id_minicurso}, function(data) {
-			if(data === 'sucesso'){
+			if(data.status === 'success'){
 				botao.hide();
+				$('.msg-success').html(data.msg);
 				$('.cadastrar-minicurso').show();
 			}else{
-				botao.html('Erro ao cancelar cadastro');
+				$('.msg-danger').html(data.msg);
 			}
 			botao.html(valorAnterior);
-			alert(data);
-		});
+		}, 'json');
 	});
 	$('.descadastrar-minicurso-usuario').click(function(e) {
 		e.preventDefault();
@@ -61,14 +61,16 @@ jQuery(document).ready(function($) {
 		var url = $(this).data('url');
 		var id_minicurso = $(this).data('minicurso');
 		var id_usuario = $(this).data('usuario');
+		var valorAnterior = botao.html();
 		botao.html('Removendo...');
 		$.post(url, {action: 'descadastrar_minicurso_usuario', minicurso: id_minicurso, usuario: id_usuario}, function(data) {
-			if(data === 'sucesso'){
+			if(data.status === 'success'){
 				$('#participante-'+id_usuario).remove();
+				$('.msg-success').html(data.msg);
 			}else{
-				botao.html('Erro ao cancelar cadastro');
+				$('.msg-success').html(data.msg);
 			}
-			alert(data);
-		});
+			botao.html(valorAnterior);
+		}, 'json');
 	});
 });

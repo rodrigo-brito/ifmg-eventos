@@ -44,6 +44,10 @@ get_header(); ?>
 									<button href="#" data-minicurso="<?php echo get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>" class="cadastrar-minicurso btn btn-primary" role="button">Inscreva-se</button>
 									<button href="#" data-minicurso="<?php echo get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>" class="descadastrar-minicurso btn btn-danger" role="button" style="display: none;">Cancelar Inscrição</button>
 									<?php endif; ?>
+									<span class="msg-ajax">
+										<span class="alert-success msg-success"></span>
+										<span class="alert-danger msg-danger"></span>
+									</span>
 								</p>
 								<?php else: ?>
 									<div class="alert alert-success" role="alert">
@@ -59,23 +63,7 @@ get_header(); ?>
 							if ( $participantes ) :	?>
 								<div class="inscritos">
 									<h4>Inscritos</h4>
-									<hr><!--
-									<?php foreach ($participantes as $key => $participante) : ?>
-										<div class="well col-md-6" id="participante-<?php echo $participante['ID']; ?>">
-											<div class="media">
-												<div class="media-left">
-													<a href="<?php echo $participante['user_url']; ?>" title="<?php echo $participante['display_name']; ?>">
-														<?php echo $participante['user_avatar']; ?>
-													</a>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading"><?php echo $participante['display_name']; ?></h4>
-													<p><i class="glyphicon glyphicon-mail"></i> <?php echo $participante['user_email']; ?> </p>
-													<p><button href="#" data-usuario="<?php echo $participante['ID']; ?>" data-minicurso="<?php echo get_the_ID(); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>" class="descadastrar-minicurso-usuario btn btn-danger" role="button">Remover</button></p>
-												</div>
-											</div>
-										</div>
-									<?php endforeach;?> -->
+									<hr>
 								</div>
 								<table class="table table-hover">
 									<th>ID</th>

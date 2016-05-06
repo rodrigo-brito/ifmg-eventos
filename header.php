@@ -58,8 +58,10 @@
 							</li>
 				          </ul>
 				        </li>
-				     </ul>
+				    </ul>
+				    <?php if( !is_user_logged_in() ): ?>
 					<a href="<?php echo wp_registration_url(); ?>" class="navbar-btn btn btn-blue btn-primary btn-lg pull-right hidden-xs" href="#">Cadastre-se</a>
+					<?php endif; ?>
 					<?php
 						wp_nav_menu(
 							array(
