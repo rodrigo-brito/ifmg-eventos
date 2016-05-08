@@ -242,7 +242,9 @@ function odin_enqueue_scripts() {
 		// Google Maps Configuration
 		wp_enqueue_script( 'google-maps-config', $template_url . '/assets/js/map.js', array( 'google-maps-v3' ), null, true );
 		wp_localize_script( 'google-maps-config', 'google_maps_data', array(
-			'address' => "Avenida Serra da Piedade, 299 - Morada da Serra, Sabará - MG", //TODO Entrada de endereço personalizado (Theme options)
+			'address' => "Faculdade de Sabará, Sabará - MG, Brasil", //TODO Entrada de endereço personalizado (Theme options)
+			'latitude' => '-19.8908444',
+			'longitude' => '-43.8259455',
 			'icon' => $template_url . '/assets/images/marker.png' //TODO Entrada de icone personalizado (Theme options)
 		));
 	}
