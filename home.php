@@ -216,8 +216,8 @@ $sliders = get_posts( $args ); ?>
 <div id="map-home">
 	<div class="address visible-lg" data-sr='enter top'>
 		<h3>IFMG - Campus Sabará</h3>
-		<p>Avenida Serra da Piedade, 299</p>
-		<p>Morada da Serra, Sabará - MG, CEP 34515-640.</p>
+		<p>Rodovia Sabará/BH, Km 14</p>
+		<p>Caieira, Sabará - MG, CEP 34555-000.</p>
 		<p>Tel. (31) 3670-1072</p>
 	</div><!-- /.address -->
 	<div id="map"></div><!-- /#map -->
