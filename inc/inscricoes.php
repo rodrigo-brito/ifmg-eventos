@@ -179,6 +179,27 @@ function getListaCadastrados( $id ){
 }
 
 /**
+ * Retorna a quantidade de usuários cadastrados
+ */
+function getTotalInscritos( $id ){
+	global $wpdb;
+	global $tb_incricoes_nome;
+
+	$minicurso_id = intval( $id );
+
+	$busca = $wpdb->get_results(
+		"SELECT *
+		FROM $tb_incricoes_nome
+		WHERE evento_id = $minicurso_id"
+	);
+	if(isset($busca)){
+		return count($busca) == 1 ? '1 inscrito' : count($busca).' inscritos';
+	}else{
+		return '0 inscritos';
+	}
+}
+
+/**
  * Retorna lista de cadastrados em um dado minicurso em chamada AJAX
  * @param  integer $minicurso 	identificação do evento/minicurso
  */

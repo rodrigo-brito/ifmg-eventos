@@ -38,6 +38,7 @@ $sliders = get_posts( $args ); ?>
 				  <div class="carousel-caption">
 					<h1><?php the_title(); ?></h1>
 					<p><?php echo get_field('slider_descricao'); ?></p>
+					<p><a href="<?php echo get_permalink( get_field('slider_link')->ID ); ?>" class="btn btn-primary" role="button">Saiba Mais</a></p>
 				  </div>
 				</div>
 			<?php
@@ -215,14 +216,13 @@ $sliders = get_posts( $args ); ?>
 <!-- Google Maps -->
 <div id="map-home">
 	<div class="address visible-lg" data-sr='enter top'>
-		<h3>IFMG - Campus Sabará</h3>
+		<h3>Faculdade de Sabará</h3>
 		<p>Rodovia Sabará/BH, Km 14</p>
 		<p>Caieira, Sabará - MG, CEP 34555-000.</p>
 		<p>Tel. (31) 3670-1072</p>
 	</div><!-- /.address -->
 	<div id="map"></div><!-- /#map -->
 </div><!-- /#map-home -->
-	
 <!-- For close in footer.php -->
 <div id="wrapper">
 	<div class="row">

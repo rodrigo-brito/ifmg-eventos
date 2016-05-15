@@ -28,7 +28,7 @@ get_header(); ?>
 								<p><strong>Duracao: </strong><?php echo $duracao; ?></p>
 								<?php endif; ?>
 								<?php if($vagas): ?>
-								<p><strong>Vagas: </strong><?php echo $vagas; ?></p>
+								<p><strong>Vagas: </strong><?php echo $vagas; ?> (<?php echo getTotalInscritos(get_the_ID()); ?>)</p>
 								<?php endif; ?>
 								<?php if($instrutor): ?>
 								<p><strong>Instrutor: </strong><?php echo $instrutor; ?></p>
